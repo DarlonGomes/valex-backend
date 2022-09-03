@@ -1,11 +1,16 @@
 
 
-export type TransactionTypes =
+export type BusinessesType =
 | "groceries"
 | "restaurant"
 | "transport"
 | "education"
 | "health";
+
+export interface CardRequest  {
+  cardType : BusinessesType;
+  employeeId : number
+}
 
 export type CardInfo = {
 cardNumber: string;
@@ -24,7 +29,7 @@ export interface CardInsertData {
     isVirtual: boolean;
     originalCardId?: number;
     isBlocked: boolean;
-    type: TransactionTypes;
+    type: BusinessesType;
   }
   
   export interface Card extends CardInsertData {
@@ -37,7 +42,7 @@ export interface CardInsertData {
     cardholderName: string;
     securityCode: string;
     expirationDate: string;
-    type: TransactionTypes;
+    type: BusinessesType;
   }
 
   export type CardUpdateData = Partial<Card>;
