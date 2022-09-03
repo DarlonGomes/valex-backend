@@ -1,10 +1,5 @@
 import { connection } from "../../src/database/database.js";
-
-export interface Company {
-  id: number;
-  name: string;
-  apiKey?: string;
-}
+import { Company } from "../interfaces/companyInterface.js";
 
 export async function findByApiKey(apiKey: string) {
   const result = await connection.query<Company, [string]>(
