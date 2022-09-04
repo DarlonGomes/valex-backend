@@ -1,5 +1,5 @@
-import { ErrorInfo } from "../middlewares/errorMiddleware.js";
-import * as employeeRepository from "../repositories/employeeRepository.js";
+import { ErrorInfo } from "../middlewares/errorMiddleware";
+import * as employeeRepository from "../repositories/employeeRepository";
 
 export async function certifyIfEmployeeWorksHere(id: number, company: number){
     const employee = await employeeRepository.findById(id);

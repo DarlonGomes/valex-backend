@@ -20,17 +20,17 @@ CVC: string;
 };
 
 export interface CardInsertData {
-    employeeId: number;
-    number: string;
-    cardholderName: string;
-    securityCode: string;
-    expirationDate: string;
-    password?: string;
-    isVirtual: boolean;
-    originalCardId?: number;
-    isBlocked: boolean;
-    type: BusinessesType;
-  }
+  employeeId: number;
+  number: string;
+  cardholderName: string;
+  securityCode: string;
+  expirationDate: string;
+  password?: string;
+  isVirtual: boolean;
+  originalCardId?: number;
+  isBlocked: boolean;
+  type: BusinessesType;
+}
   
   export interface Card extends CardInsertData {
     id: number;

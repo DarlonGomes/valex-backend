@@ -1,5 +1,5 @@
-import { connection } from "../../src/database/database.js";
-import { Business } from "../interfaces/businessInterface.js";
+import { connection } from "../../src/database/database";
+import { Business } from "../interfaces/businessInterface";
 
 export async function findById(id: number) {
   const result = await connection.query<Business, [number]>(

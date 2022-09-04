@@ -1,5 +1,5 @@
-import { ErrorInfo } from "../middlewares/errorMiddleware.js";
-import * as companyRepository from "../repositories/companyRepository.js";
+import { ErrorInfo } from "../middlewares/errorMiddleware";
+import * as companyRepository from "../repositories/companyRepository";
 
 export async function KeyValidation (key : string){
     const company = await companyRepository.findByApiKey(key);

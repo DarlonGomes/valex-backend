@@ -1,5 +1,5 @@
-import { connection } from "../../src/database/database.js";
-import { mapObjectToUpdateQuery } from "../../src/utils/sqlUtils.js";
+import { connection } from "../../src/database/database";
+import { mapObjectToUpdateQuery } from "../../src/utils/sqlUtils";
 import { BusinessesType, Card, CardInsertData, CardUpdateData  } from "../interfaces/cardInterface.js";
 
 
