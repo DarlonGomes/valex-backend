@@ -1,6 +1,6 @@
-import { connection } from "../../src/database/database.js";
-import { mapObjectToUpdateQuery } from "../../src/utils/sqlUtils.js";
-import { TransactionTypes, Card, CardInsertData, CardUpdateData  } from "../interfaces/cardInterface.js";
+import { connection } from "../../src/database/database";
+import { mapObjectToUpdateQuery } from "../../src/utils/sqlUtils";
+import { BusinessesType, Card, CardInsertData, CardUpdateData  } from "../interfaces/cardInterface.js";
 
 
 export async function find() {
@@ -18,10 +18,10 @@ export async function findById(id: number) {
 }
 
 export async function findByTypeAndEmployeeId(
-  type: TransactionTypes,
+  type: BusinessesType,
   employeeId: number
 ) {
-  const result = await connection.query<Card, [TransactionTypes, number]>(
+  const result = await connection.query<Card, [BusinessesType, number]>(
     `SELECT * FROM cards WHERE type=$1 AND "employeeId"=$2`,
     [type, employeeId]
   );

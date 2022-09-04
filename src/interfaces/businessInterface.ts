@@ -1,7 +1,7 @@
-import { TransactionTypes } from "./cardInterface";
+import { BusinessesType } from "./cardInterface";
 
 export interface Business {
     id: number;
     name: string;
-    type: TransactionTypes;
+    type: BusinessesType;
   }

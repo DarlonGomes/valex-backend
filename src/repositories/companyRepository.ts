@@ -1,5 +1,5 @@
-import { connection } from "../../src/database/database.js";
-import { Company } from "../interfaces/companyInterface.js";
+import { connection } from "../../src/database/database";
+import { Company } from "../interfaces/companyInterface";
 
 export async function findByApiKey(apiKey: string) {
   const result = await connection.query<Company, [string]>(
