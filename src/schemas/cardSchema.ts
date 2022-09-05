@@ -22,3 +22,7 @@ export const physicalPurchase = Joi.object({
     cardPassword: Joi.string().regex(new RegExp("^[0-9]{4}")).length(4).required(),
     value: Joi.number().positive().required()
 });
+
+export const balanceSchema = Joi.object({
+    cardId: Joi.number().positive().required()
+});
