@@ -12,8 +12,8 @@ export async function createCard (req: Request<{},{}, CardRequest>, res:Response
 }
 
 export async function rechargeCard (req: Request, res:Response){
-    const { id, value} = req.body;
-    await cardService.CardValidation(id!, "default");
-    const {amount} = await cardService.insertAmount(id, value);
+    const { cardId, value} = req.body;
+    await cardService.CardValidation(cardId!, "default");
+    const {amount} = await cardService.insertAmount(cardId, value);
     return res.status(201).send(`Successfull. You've recharged this amount: $${amount * 0.01}`);
 }

@@ -19,7 +19,7 @@ interface ErrorInterface {
     [errorType : string] : {status : number}
 }
 
-export async function errorHandler(error: ErrorObject, req: Request, res: Response, next: NextFunction){
+export async function errorHandler(error: ErrorObject, _req: Request, res: Response, _next: NextFunction){
     const {type, message} = error;
     const Errors: ErrorInterface = {
         error_bad_request: {

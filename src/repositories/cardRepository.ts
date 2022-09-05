@@ -102,3 +102,14 @@ export async function update(id: number, cardData: CardUpdateData) {
 export async function remove(id: number) {
   await connection.query<any, [number]>("DELETE FROM cards WHERE id=$1", [id]);
 }
+
+export async function balance (id: number){
+  const {rows : [balance]} = await connection.query(
+    `SELECT 
+    (SELECT SUM(amount) FROM recharges WHERE "cardId" = $1)
+    - (SELECT SUM(amount) FROM payments WHERE "cardId" = $2) AS balance
+    `,
+    [id, id]
+  );
+  return balance
+}

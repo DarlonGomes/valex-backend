@@ -6,11 +6,11 @@ import { schemaValidation } from "../middlewares/joiMiddleware";
 
 export const cardRoute = Router();
 
-cardRoute.post("/cards/create", headerValidation, postController.createCard);
-cardRoute.post("/cards/recharge", schemaValidation.checkValue, postController.rechargeCard);
+cardRoute.post("/create", headerValidation, postController.createCard);
+cardRoute.post("/recharge", schemaValidation.checkValue, postController.rechargeCard);
 
-cardRoute.get("/cards/statement");
+cardRoute.get("/statement");
 
-cardRoute.patch("/cards/activate", schemaValidation.activateCard,  patchController.activateCard);
-cardRoute.patch("/cards/block" ,schemaValidation.changeStatus, patchController.blockCard);
-cardRoute.patch("/cards/unblock", schemaValidation.changeStatus, patchController.unblockCard);
+cardRoute.patch("/activate", schemaValidation.activateCard,  patchController.activateCard);
+cardRoute.patch("/block" ,schemaValidation.changeStatus, patchController.blockCard);
+cardRoute.patch("/unblock", schemaValidation.changeStatus, patchController.unblockCard);

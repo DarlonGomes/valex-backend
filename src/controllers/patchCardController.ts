@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
-import { CardUpdateData } from "../interfaces/cardInterface";
+import { CardUpdateData,  } from "../interfaces/cardInterface";
 import * as cardService from "../services/cardService";
 
 export async function activateCard (req: Request<{},{}, CardUpdateData>, res: Response){
-    const { id, securityCode, password} = req.body;
-    await cardService.CardValidation(id!, "activate", securityCode!);
-    await cardService.insertPassword(password!, id!);
+    const { employeeId, securityCode, password} = req.body;
+    await cardService.CardValidation(employeeId!, "activate", securityCode!);
+    await cardService.insertPassword(password!, employeeId!);
     return res.status(204).send("Successfull. Your card is active")
 }
 
