@@ -183,7 +183,7 @@ POST /cards/create
 | Body         | Type     | Description                              |
 | :------------| :------- | :--------------------------------------- |
 | `employeeId` | `integer`| **Required**. user Id                    |
-| `type`       | `string` | **Required**. type of card benefit       |
+| `cardType`       | `string` | **Required**. type of card benefit       |
 
 `Valid types: [groceries, restaurant, transport, education, health]`
 
@@ -252,7 +252,7 @@ POST /cards/recharge
 | Body             | Type      | Description                        |
 | :--------------- | :-------- | :--------------------------------- |
 | `cardId`         | `integer` | **Required**. card Id              |
-| `amount`         | `integer` | **Required**. recharge amount      |
+| `value`          | `integer` | **Required**. recharge amount      |
 
 
 #
