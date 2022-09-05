@@ -398,21 +398,18 @@ Start the server
 # 
 
 ## Lessons Learned
-
 - API Architecture
 - TypeScript interfaces
 - TypeScript types
 - Classes
 - Constructor
 - Object Literals
-
 # 
 
 ## Acknowledgements
 
 -   [Badges for Github](https://dev.to/envoy_/150-badges-for-github-pnk)
 -   [README inspiration](https://github.com/andrezopo/projeto18-valex#readme)
-</br>
 
 #
 
