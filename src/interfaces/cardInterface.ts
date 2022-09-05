@@ -47,3 +47,5 @@ export interface CardInsertData {
   }
 
   export type CardUpdateData = Partial<Card>;
+
+  export type CardBalance = Partial<CardResponse>;
