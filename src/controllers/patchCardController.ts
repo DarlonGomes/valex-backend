@@ -16,9 +16,9 @@ export async function blockCard ( req: Request <{},{}, CardUpdateData>, res: Res
     return res.status(204).send("Successfull. Your card is now blocked")
 }
 
-export async function unblockCard ( req: Request <{},{}, CardUpdateData>, res: Response){
+export async function unlockCard ( req: Request <{},{}, CardUpdateData>, res: Response){
     const { id, password} = req.body;
-    const card = await cardService.CardValidation(id!, "unblock");
+    const card = await cardService.CardValidation(id!, "unlock");
     await cardService.changeCardStatus(id!, password!, card, false);
-    return res.status(204).send("Successfull. Your card is now unblocked")
+    return res.status(204).send("Successfull. Your card is now unlocked")
 }

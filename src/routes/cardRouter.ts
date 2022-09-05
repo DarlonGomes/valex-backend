@@ -14,4 +14,4 @@ cardRoute.get("/statement/:cardId", schemaValidation.balance, getController.getS
 
 cardRoute.patch("/activate", schemaValidation.activateCard,  patchController.activateCard);
 cardRoute.patch("/block" ,schemaValidation.changeStatus, patchController.blockCard);
-cardRoute.patch("/unblock", schemaValidation.changeStatus, patchController.unblockCard);
+cardRoute.patch("/unlock", schemaValidation.changeStatus, patchController.unlockCard);

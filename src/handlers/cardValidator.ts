@@ -21,7 +21,7 @@ export async function checkIfCardExists ( cardId: number) {
     return card
 }
 
-export async function checkIfCardIsActive (card : Card, method: |"block" | "unblock" | "activate" | "default"){
+export async function checkIfCardIsActive (card : Card, method: |"block" | "unlock" | "activate" | "default"){
     if(method === "activate" && card.password !== null) throw new ErrorInfo("error_conflict", "This card is already active");
     if(method !== "activate" && card.password === null) throw new ErrorInfo("error_conflict", "This card isn't active");
 }
@@ -38,9 +38,9 @@ export async function checkCardCVC ( securityCode : string, card : Card){
     if(encryptedCVC !== securityCode) throw new ErrorInfo("error_conflict", "The security code doesn't match");
 }
 
-export async function checkCardStatus(card: Card, method: | "block" | "unblock" | "activate" | "default"){
+export async function checkCardStatus(card: Card, method: | "block" | "unlock" | "activate" | "default"){
     if(method === "block" && card.isBlocked) throw new ErrorInfo("error_conflict", "This card is already blocked");
-    if(method === "unblock" && !card.isBlocked) throw new ErrorInfo("error_conflict", "This card is already unblocked");
+    if(method === "unlock" && !card.isBlocked) throw new ErrorInfo("error_conflict", "This card is already unblocked");
     if(method === "default" && card.isBlocked) throw new ErrorInfo("error_conflict", "Denied. This card is blocked");
 
 }

@@ -21,7 +21,7 @@ export async function createNewCard (employeeName:string, employeeId:number, car
     return { cardId, ...card.cardPreview}
 };
 
-export async function CardValidation (cardId:number, method: | "block" | "unblock" | "activate" | "default", securityCode?: string,){
+export async function CardValidation (cardId:number, method: | "block" | "unlock" | "activate" | "default", securityCode?: string,){
     const card : Card = await cardValidator.checkIfCardExists(cardId);
     await cardValidator.checkCardValidation(card.expirationDate);
     await cardValidator.checkIfCardIsActive(card, method);
