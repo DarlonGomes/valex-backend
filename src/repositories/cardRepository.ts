@@ -107,8 +107,8 @@ export async function receipt (id: number){
   const {rows: [receipt]} = await connection.query(
     `
     SELECT
-    (SELECT SUM(amount) FROM recharges WHERE "cardId" = $1)
-    - (SELECT SUM(amount) FROM payments WHERE "cardId" = $1) AS balance,
+    COALESCE((SELECT SUM(amount) FROM recharges WHERE "cardId" = $1)
+    - (SELECT SUM(amount) FROM payments WHERE "cardId" = $1), 0) AS balance,
       array(
         SELECT
         json_build_object(
