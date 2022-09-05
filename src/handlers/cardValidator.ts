@@ -38,9 +38,10 @@ export async function checkCardCVC ( securityCode : string, card : Card){
     if(encryptedCVC !== securityCode) throw new ErrorInfo("error_conflict", "The security code doesn't match");
 }
 
-export async function checkCardStatus(card: Card, status: string){
-    if(status === "block" && card.isBlocked)throw new ErrorInfo("error_conflict", "This card is already blocked");
-    if(status === "unblock" && !card.isBlocked)throw new ErrorInfo("error_conflict", "This card is already unblocked");
+export async function checkCardStatus(card: Card, method: | "block" | "unblock" | "activate" | "default"){
+    if(method === "block" && card.isBlocked)throw new ErrorInfo("error_conflict", "This card is already blocked");
+    if(method === "unblock" && !card.isBlocked)throw new ErrorInfo("error_conflict", "This card is already unblocked");
+
 }
 
 export async function checkPassword (card: Card, password: string){
