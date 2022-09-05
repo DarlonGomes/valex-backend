@@ -6,10 +6,3 @@ export interface Employee {
     companyId: number;
 }
 
-export interface ActivateEmployeeCard {
-  number: string;
-  cardholderName: string;
-  creditCardCVC: string;
-  expirationDate: string;
-  password: string;
-}

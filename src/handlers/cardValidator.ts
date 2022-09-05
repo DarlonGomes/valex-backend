@@ -15,14 +15,15 @@ export async function checkIfUserHaveThisCard (cardType: BusinessesType, employe
     if(card) throw new ErrorInfo("error_conflict", "This employee already have this card");
 }
 
-export async function checkIfCardExists ( number: string, cardholderName: string, expirationDate: string) {
-    const card = await cardRepository.findByCardDetails(number, cardholderName, expirationDate);
+export async function checkIfCardExists ( id: number) {
+    const card = await cardRepository.findById(id);
     if(!card) throw new ErrorInfo("error_not_found", "This card doesn't exists");
     return card
 }
 
-export async function checkIfCardIsActive (card : Card){
-    if(card.password !== null) throw new ErrorInfo("error_conflict", "This card is already active");
+export async function checkIfCardIsActive (card : Card, method: |"block" | "unblock" | "activate" | "default"){
+    if(method === "activate" && card.password !== null) throw new ErrorInfo("error_conflict", "This card is already active");
+    if(method !== "activate" && card.password === null) throw new ErrorInfo("error_conflict", "This card isn't active");
 }
 
 export async function checkCardValidation (date: string){
@@ -32,7 +33,17 @@ export async function checkCardValidation (date: string){
     if(response) throw new ErrorInfo("error_conflict", "This card has expired");
 }
 
-export async function checkCardCVC ( CVC : string, card : Card){
+export async function checkCardCVC ( securityCode : string, card : Card){
     const encryptedCVC = encryptUtilts.decryptData(card.securityCode);
-    if(encryptedCVC !== CVC) throw new ErrorInfo("error_conflict", "The security code doesn't match");
+    if(encryptedCVC !== securityCode) throw new ErrorInfo("error_conflict", "The security code doesn't match");
+}
+
+export async function checkCardStatus(card: Card, status: string){
+    if(status === "block" && card.isBlocked)throw new ErrorInfo("error_conflict", "This card is already blocked");
+    if(status === "unblock" && !card.isBlocked)throw new ErrorInfo("error_conflict", "This card is already unblocked");
+}
+
+export async function checkPassword (card: Card, password: string){
+    const response : boolean = encryptUtilts.validateBcryptData(password, card.password!)
+    if(!response) throw new ErrorInfo("error_conflict", "Password doesn't match");
 }

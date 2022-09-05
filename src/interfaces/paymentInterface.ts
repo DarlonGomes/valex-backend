@@ -8,3 +8,7 @@ export interface Payment {
   export type PaymentWithBusinessName = Payment & { businessName: string };
   export type PaymentInsertData = Omit<Payment, "id" | "timestamp">;
   
+export interface Exchange {
+  id: number;
+  value: number;
+}
