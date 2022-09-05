@@ -104,12 +104,12 @@ export async function remove(id: number) {
 }
 
 export async function balance (id: number){
-  const {rows : [total]} = await connection.query(
+  const {rows : [balance]} = await connection.query(
     `SELECT 
     (SELECT SUM(amount) FROM recharges WHERE "cardId" = $1)
-    - (SELECT SUM(amount) FROM payments WHERE "cardId" = $2) AS total
+    - (SELECT SUM(amount) FROM payments WHERE "cardId" = $2) AS balance
     `,
     [id, id]
   );
-  return total
+  return balance
 }

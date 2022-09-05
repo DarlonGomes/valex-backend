@@ -9,5 +9,5 @@ export async function posPurchase (req: Request < {}, {}, PhysicalPurchase>, res
     await businessService.validateBusiness(businessId, card.type);
     await businessService.validatePurchase(cardPassword, card, value);
     await businessService.insertPayment(cardId, businessId, value)
-    return res.status(201).send(`Sucessfull.`);
+    return res.status(201).send(`Sucessfull. Was charged $${value * 0.01}`);
 }
