@@ -15,8 +15,8 @@ export async function checkIfUserHaveThisCard (cardType: BusinessesType, employe
     if(card) throw new ErrorInfo("error_conflict", "This employee already have this card");
 }
 
-export async function checkIfCardExists ( id: number) {
-    const card = await cardRepository.findById(id);
+export async function checkIfCardExists ( cardId: number) {
+    const card = await cardRepository.findById(cardId);
     if(!card) throw new ErrorInfo("error_not_found", "This card doesn't exists");
     return card
 }
@@ -39,12 +39,18 @@ export async function checkCardCVC ( securityCode : string, card : Card){
 }
 
 export async function checkCardStatus(card: Card, method: | "block" | "unblock" | "activate" | "default"){
-    if(method === "block" && card.isBlocked)throw new ErrorInfo("error_conflict", "This card is already blocked");
-    if(method === "unblock" && !card.isBlocked)throw new ErrorInfo("error_conflict", "This card is already unblocked");
+    if(method === "block" && card.isBlocked) throw new ErrorInfo("error_conflict", "This card is already blocked");
+    if(method === "unblock" && !card.isBlocked) throw new ErrorInfo("error_conflict", "This card is already unblocked");
+    if(method === "default" && card.isBlocked) throw new ErrorInfo("error_conflict", "Denied. This card is blocked");
 
 }
 
 export async function checkPassword (card: Card, password: string){
     const response : boolean = encryptUtilts.validateBcryptData(password, card.password!)
     if(!response) throw new ErrorInfo("error_conflict", "Password doesn't match");
+}
+
+export async function checkCardBalance (cardId: number, amount: number){
+    const {total} = await cardRepository.balance(cardId);
+    if((total - amount) > 0) throw new ErrorInfo("error_conflict", "You don't have enough funds");
 }

@@ -4,5 +4,5 @@ import { purchaseRoute } from "./purchaseRoute";
 
 export const router = Router();
 
-router.use(cardRoute);
+router.use("/cards", cardRoute);
 router.use(purchaseRoute);

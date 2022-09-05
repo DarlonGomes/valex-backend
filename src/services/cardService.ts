@@ -21,8 +21,8 @@ export async function createNewCard (employeeName:string, employeeId:number, car
     return { cardId, ...card.cardPreview}
 };
 
-export async function CardValidation (id:number, method: | "block" | "unblock" | "activate" | "default", securityCode?: string,){
-    const card : Card = await cardValidator.checkIfCardExists(id);
+export async function CardValidation (cardId:number, method: | "block" | "unblock" | "activate" | "default", securityCode?: string,){
+    const card : Card = await cardValidator.checkIfCardExists(cardId);
     await cardValidator.checkCardValidation(card.expirationDate);
     await cardValidator.checkIfCardIsActive(card, method);
     await cardValidator.checkCardStatus(card, method!);
@@ -31,17 +31,17 @@ export async function CardValidation (id:number, method: | "block" | "unblock" |
     return card
 };
 
-export async function insertPassword(password : string, id: number){
+export async function insertPassword(password : string, cardId: number){
     const encryptedPassword  =  encryptUtilts.hashDataBcrypt(password);
-    await cardRepository.update(id, {password: encryptedPassword});
+    await cardRepository.update(cardId, {password: encryptedPassword});
 };
 
-export async function changeCardStatus(id: number, password: string, card: Card, method: boolean){
+export async function changeCardStatus(cardId: number, password: string, card: Card, method: boolean){
     await cardValidator.checkPassword(card, password);
-    await cardRepository.update(id, {isBlocked: method})
+    await cardRepository.update(cardId, {isBlocked: method})
 }
 
-export async function insertAmount (id: number, value: number){
-    const amount = await rechargeRepository.insert({cardId: id, amount: value});
+export async function insertAmount (cardId: number, value: number){
+    const amount = await rechargeRepository.insert({cardId: cardId, amount: value});
     return amount;
 }
