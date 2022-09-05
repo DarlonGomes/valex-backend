@@ -11,7 +11,7 @@ export function generateCreditCardInfo (employeeName: string, cardType: Business
     const securityCode = encryptUtilts.encryptData(creditCardCVC);
     const expirationDate = dayjs().add(5,"y").format("MM/YY");
     const type  = cardType;
-    const isBlocked = true;
+    const isBlocked = false;
     const isVirtual = false;
 
     return {

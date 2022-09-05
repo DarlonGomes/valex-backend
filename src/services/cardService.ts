@@ -16,19 +16,25 @@ export async function createCardValidation (key:string, employeeId:number, cardT
 
 export async function createNewCard (employeeName:string, employeeId:number, cardType: BusinessesType){
     const card = generateCreditCardInfo(employeeName, cardType, employeeId);
-    await cardRepository.insert(card.databaseCard)
-    return card.cardPreview
+    const {cardId} = await cardRepository.insert(card.databaseCard)
+    return { cardId, ...card.cardPreview}
 };
 
-export async function activateCardValidation (number: string, cardholderName: string, creditCardCVC: string, expirationDate: string){
-    const card : Card = await cardValidator.checkIfCardExists(number, cardholderName, expirationDate);
-    await cardValidator.checkCardValidation(expirationDate);
-    await cardValidator.checkIfCardIsActive(card);
-    await cardValidator.checkCardCVC(creditCardCVC, card);
-    return card?.id
+export async function CardValidation (id:number, method: | "block" | "unblock" | "activate", securityCode?: string,){
+    const card : Card = await cardValidator.checkIfCardExists(id);
+    await cardValidator.checkCardValidation(card.expirationDate);
+    await cardValidator.checkIfCardIsActive(card, method);
+    await cardValidator.checkCardStatus(card, method);
+    
+    if(method === "activate") await cardValidator.checkCardCVC(securityCode!, card);
+    
 };
 
-export async function insertPassword(password : string, cardId: number){
+export async function insertPassword(password : string, id: number){
     const encryptedPassword  =  encryptUtilts.hashDataBcrypt(password);
-    await cardRepository.update(cardId, {password: encryptedPassword});
+    await cardRepository.update(id, {password: encryptedPassword});
 };
+
+export async function changeCardStatus(id: number, method: "block" | "unblock"){
+
+}

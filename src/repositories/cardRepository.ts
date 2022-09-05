@@ -59,11 +59,12 @@ export async function insert(cardData: CardInsertData) {
     type,
   } = cardData;
 
- await connection.query(
+ const {rows: [cardId]} = await connection.query(
     `
     INSERT INTO cards ("employeeId", number, "cardholderName", "securityCode",
       "expirationDate", password, "isVirtual", "originalCardId", "isBlocked", type)
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+    RETURNING id AS "cardId"
   `,
     [
       employeeId,
@@ -78,6 +79,7 @@ export async function insert(cardData: CardInsertData) {
       type,
     ]
   );
+  return cardId
 }
 
 export async function update(id: number, cardData: CardUpdateData) {
