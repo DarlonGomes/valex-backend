@@ -183,7 +183,7 @@ POST /cards/create
 | Body         | Type     | Description                              |
 | :------------| :------- | :--------------------------------------- |
 | `employeeId` | `integer`| **Required**. user Id                    |
-| `type`       | `string` | **Required**. type of card benefit       |
+| `cardType`       | `string` | **Required**. type of card benefit       |
 
 `Valid types: [groceries, restaurant, transport, education, health]`
 
@@ -252,7 +252,7 @@ POST /cards/recharge
 | Body             | Type      | Description                        |
 | :--------------- | :-------- | :--------------------------------- |
 | `cardId`         | `integer` | **Required**. card Id              |
-| `amount`         | `integer` | **Required**. recharge amount      |
+| `value`          | `integer` | **Required**. recharge amount      |
 
 
 #
@@ -398,21 +398,18 @@ Start the server
 # 
 
 ## Lessons Learned
-
 - API Architecture
 - TypeScript interfaces
 - TypeScript types
 - Classes
 - Constructor
 - Object Literals
-
 # 
 
 ## Acknowledgements
 
 -   [Badges for Github](https://dev.to/envoy_/150-badges-for-github-pnk)
 -   [README inspiration](https://github.com/andrezopo/projeto18-valex#readme)
-</br>
 
 #
 
