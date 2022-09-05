@@ -7,8 +7,9 @@ export interface Employee {
 }
 
 export interface ActivateEmployeeCard {
-  number: number;
+  number: string;
   cardholderName: string;
   creditCardCVC: string;
   expirationDate: string;
+  password: string;
 }
