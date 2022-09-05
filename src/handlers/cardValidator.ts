@@ -21,9 +21,9 @@ export async function checkIfCardExists ( id: number) {
     return card
 }
 
-export async function checkIfCardIsActive (card : Card, method: |"block" | "unblock" | "activate"){
+export async function checkIfCardIsActive (card : Card, method: |"block" | "unblock" | "activate" | "default"){
     if(method === "activate" && card.password !== null) throw new ErrorInfo("error_conflict", "This card is already active");
-    if(method !== "activate" && card.password === null) throw new ErrorInfo("error_conflict", "This card isn't active")
+    if(method !== "activate" && card.password === null) throw new ErrorInfo("error_conflict", "This card isn't active");
 }
 
 export async function checkCardValidation (date: string){
@@ -41,4 +41,9 @@ export async function checkCardCVC ( securityCode : string, card : Card){
 export async function checkCardStatus(card: Card, status: string){
     if(status === "block" && card.isBlocked)throw new ErrorInfo("error_conflict", "This card is already blocked");
     if(status === "unblock" && !card.isBlocked)throw new ErrorInfo("error_conflict", "This card is already unblocked");
+}
+
+export async function checkPassword (card: Card, password: string){
+    const response : boolean = encryptUtilts.validateBcryptData(password, card.password!)
+    if(!response) throw new ErrorInfo("error_conflict", "Password doesn't match");
 }

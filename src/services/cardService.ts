@@ -20,14 +20,14 @@ export async function createNewCard (employeeName:string, employeeId:number, car
     return { cardId, ...card.cardPreview}
 };
 
-export async function CardValidation (id:number, method: | "block" | "unblock" | "activate", securityCode?: string,){
+export async function CardValidation (id:number, method: | "block" | "unblock" | "activate" | "default", securityCode?: string,){
     const card : Card = await cardValidator.checkIfCardExists(id);
     await cardValidator.checkCardValidation(card.expirationDate);
     await cardValidator.checkIfCardIsActive(card, method);
-    await cardValidator.checkCardStatus(card, method);
-    
+    await cardValidator.checkCardStatus(card, method!);
+
     if(method === "activate") await cardValidator.checkCardCVC(securityCode!, card);
-    
+    return card
 };
 
 export async function insertPassword(password : string, id: number){
@@ -35,6 +35,7 @@ export async function insertPassword(password : string, id: number){
     await cardRepository.update(id, {password: encryptedPassword});
 };
 
-export async function changeCardStatus(id: number, method: "block" | "unblock"){
-
+export async function changeCardStatus(id: number, password: string, card: Card, method: boolean){
+    await cardValidator.checkPassword(card, password);
+    await cardRepository.update(id, {isBlocked: method})
 }

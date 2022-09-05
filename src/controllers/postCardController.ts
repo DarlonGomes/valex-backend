@@ -11,6 +11,7 @@ export async function createCard (req: Request<{},{}, CardRequest>, res:Response
     return res.status(201).send(card);
 }
 
-export function rechargeCard (req: Request, res:Response){
-    
+export async function rechargeCard (req: Request, res:Response){
+    const { id, value} = req.body;
+    await cardService.CardValidation(id!, "default")
 }
