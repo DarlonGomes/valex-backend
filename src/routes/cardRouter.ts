@@ -8,7 +8,7 @@ import { schemaValidation } from "../middlewares/joiMiddleware";
 export const cardRoute = Router();
 
 cardRoute.post("/create", headerValidation, postController.createCard);
-cardRoute.post("/recharge", schemaValidation.checkValue, postController.rechargeCard);
+cardRoute.post("/recharge", headerValidation, schemaValidation.checkValue, postController.rechargeCard);
 
 cardRoute.get("/statement/:cardId", schemaValidation.balance, getController.getStatement);
 

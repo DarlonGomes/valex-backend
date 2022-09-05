@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction} from "express"
 import * as schema from "../schemas/cardSchema";
 import {ErrorInfo } from "../middlewares/errorMiddleware";
-import { CardBalance, CardUpdateData } from "../interfaces/cardInterface";
+import { CardBalance, CardStatus, CardUpdateData } from "../interfaces/cardInterface";
 import { Exchange, PhysicalPurchase } from "../interfaces/paymentInterface";
 
 export const schemaValidation =  {
@@ -11,7 +11,7 @@ export const schemaValidation =  {
         if(validation.error) throw new ErrorInfo("error_unprocessable_entity", validation.error.message);
         next();
     },
-    changeStatus: (req: Request<{},{}, CardUpdateData>, _res:Response, next: NextFunction) => {
+    changeStatus: (req: Request<{},{}, CardStatus>, _res:Response, next: NextFunction) => {
         const dataObject = req.body;
         const validation = schema.statusCardSchema.validate(dataObject, {abortEarly: false});
         if(validation.error) throw new ErrorInfo("error_unprocessable_entity", validation.error.message);

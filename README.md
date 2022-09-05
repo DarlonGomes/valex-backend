@@ -420,7 +420,7 @@ Start the server
 
 ## Authors
 
--   Darlon Gomes is a student at Driven Education and is putting effort into it to switch careers. Nowadays he works with Fine Woodworking 
-    looking forward to become a Dev.
+-   Darlon Gomes is a student at Driven Education and is putting effort into switch careers. Nowadays he works with Fine Woodworking 
+    looking forward to become a Fullstack Dev.
 <br/>
 
