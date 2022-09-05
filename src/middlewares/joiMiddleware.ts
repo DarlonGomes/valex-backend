@@ -21,6 +21,7 @@ export const schemaValidation =  {
         const dataObject = req.body;
         const validation = schema.valueSchema.validate(dataObject, {abortEarly: false});
         if(validation.error) throw new ErrorInfo("error_unprocessable_entity", validation.error.message);
+        console.log(dataObject);
         next();
     }
 }

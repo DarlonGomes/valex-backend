@@ -1,4 +1,5 @@
 import * as cardRepository from "../repositories/cardRepository";
+import * as rechargeRepository from "../repositories/rechargeRepository";
 import * as companyValidator from "../handlers/companyValidator";
 import * as employeeValidator from "../handlers/employeeValidator";
 import * as cardValidator from "../handlers/cardValidator";
@@ -38,4 +39,9 @@ export async function insertPassword(password : string, id: number){
 export async function changeCardStatus(id: number, password: string, card: Card, method: boolean){
     await cardValidator.checkPassword(card, password);
     await cardRepository.update(id, {isBlocked: method})
+}
+
+export async function insertAmount (id: number, value: number){
+    const amount = await rechargeRepository.insert({cardId: id, amount: value});
+    return amount;
 }
