@@ -103,13 +103,40 @@ export async function remove(id: number) {
   await connection.query<any, [number]>("DELETE FROM cards WHERE id=$1", [id]);
 }
 
-export async function balance (id: number){
-  const {rows : [balance]} = await connection.query(
-    `SELECT 
+export async function receipt (id: number){
+  const {rows: [receipt]} = await connection.query(
+    `
+    SELECT
     (SELECT SUM(amount) FROM recharges WHERE "cardId" = $1)
-    - (SELECT SUM(amount) FROM payments WHERE "cardId" = $2) AS balance
-    `,
-    [id, id]
+    - (SELECT SUM(amount) FROM payments WHERE "cardId" = $1) AS balance,
+      array(
+        SELECT
+        json_build_object(
+          'id', payments.id,
+          'cardId', payments."cardId",
+          'businessName', businesses.name,
+          'timestamp', payments.timestamp,
+          'amount', payments.amount
+        )
+        FROM payments
+        JOIN businesses ON payments."businessId" = businesses.id
+        WHERE payments."cardId" = $1
+        ORDER BY payments.id DESC
+      ) AS transactions,
+      array(
+        SELECT
+        json_build_object(
+          'id', recharges.id,
+          'cardId', recharges."cardId",
+          'timestamp', recharges.timestamp,
+          'amount', recharges.amount
+        )
+        FROM recharges
+        WHERE recharges."cardId" = $1
+        ORDER BY recharges.id DESC
+      ) AS recharges
+    
+    `, [id]
   );
-  return balance
+  return receipt
 }

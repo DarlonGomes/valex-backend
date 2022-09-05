@@ -45,3 +45,8 @@ export async function insertAmount (cardId: number, value: number){
     const amount = await rechargeRepository.insert({cardId: cardId, amount: value});
     return amount;
 }
+
+export async function checkBalance (cardId: number){
+    const receipt = await cardRepository.receipt(cardId);
+    return receipt
+}
