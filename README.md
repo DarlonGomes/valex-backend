@@ -406,14 +406,12 @@ Start the server
 - Constructor
 - Object Literals
 
-</br>
-
 # 
 
 ## Acknowledgements
 
 -   [Badges for Github](https://dev.to/envoy_/150-badges-for-github-pnk)
--   [README inspiration](https://github.com/andrezopo/projeto18-valex/edit/main/README.md)
+-   [README inspiration](https://github.com/andrezopo/projeto18-valex#readme)
 </br>
 
 #
