@@ -52,5 +52,6 @@ export async function checkPassword (card: Card, password: string){
 
 export async function checkCardBalance (cardId: number, amount: number){
     const {balance} = await cardRepository.receipt(cardId);
+    console.log(balance)
     if((balance - amount) < 0) throw new ErrorInfo("error_conflict", "You don't have enough funds");
 }
