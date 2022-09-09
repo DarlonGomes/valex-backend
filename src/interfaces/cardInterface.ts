@@ -46,7 +46,9 @@ export interface CardInsertData {
     type: BusinessesType;
   }
 
-  export type CardUpdateData = Partial<Card>;
+  export interface CardUpdateData extends Partial<Card>{
+    cardId? : number
+  };
 
   export type CardBalance = Partial<CardResponse>;
 
