@@ -1,5 +1,5 @@
 <div align="center">
-  <a href="https://github.com/LeonMesquita/projeto-17-linkr-front">
+  <a href="https://github.com/DarlonGomes/valex-backend">
     <img src="https://images.emojiterra.com/twitter/512px/1f355.png" alt="JavaScriptLogo" width="100">
   </a>
 
